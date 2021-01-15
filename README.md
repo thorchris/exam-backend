@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dahlfrederik/3sem_exam_backend.svg?branch=main)](https://travis-ci.org/dahlfrederik/3sem_exam_backend)
+[![Build Status](https://travis-ci.org/thorchris/exam-backend.svg?branch=master)](https://travis-ci.org/thorchris/exam-backend)
 
 *This project is meant as start code for upcoming projects which will use an endomondo like structure"*
 
