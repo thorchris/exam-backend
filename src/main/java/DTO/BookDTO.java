@@ -2,7 +2,8 @@ package DTO;
 
 import entities.Book;
 
-public class BookDTO { 
+public class BookDTO {  
+    private int id;
     private int isbn;
     private String title;
     private String author;
@@ -10,6 +11,7 @@ public class BookDTO {
     private int publishYear;
 
     public BookDTO(Book b) {
+        this.id = b.getId();
         this.isbn = b.getIsbn();
         this.title = b.getTitle();
         this.author = b.getAuthor();

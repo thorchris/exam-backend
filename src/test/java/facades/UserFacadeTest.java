@@ -58,10 +58,6 @@ public class UserFacadeTest {
         assertEquals(2, facade.getAllUsers().size() , "Expects two rows in the database");
     }
     
-    
-    /**
-     * Test of addUser method, of class UserFacade.
-     */
     //@Disabled
     @Test
     public void testAddUser() {

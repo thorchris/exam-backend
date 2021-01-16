@@ -46,10 +46,10 @@ public class BookResource {
     }
     
     @DELETE
-    @Path("/{isbn}")
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String deleteBook(@PathParam("isbn") int isbn) throws BookNotFoundException{
-        BookDTO pd = bf.deleteBook(isbn);
+    public String deleteBook(@PathParam("id") int id) throws BookNotFoundException{
+        BookDTO pd = bf.deleteBook(id);
         return "Deleted: " + GSON.toJson(pd);
     }
     
