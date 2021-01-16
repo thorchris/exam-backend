@@ -4,11 +4,13 @@ import DTO.BooksDTO;
 import entities.Book;
 import entities.Role;
 import entities.User;
+import errorhandling.BookNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
@@ -55,7 +57,7 @@ public class BookFacadeTest {
     
     @Test
     public void testAddBook() {
-        System.out.println("TESTING SIZE AFTER ADD METHOD ....");
+        System.out.println("TESTING SIZE BEFORE ADD METHOD ....");
 
         int isbn = 978148414;
         String title = "Postmand Per";
@@ -66,5 +68,15 @@ public class BookFacadeTest {
         facade.addBook(isbn, title, author, publisher, publishYear);
         System.out.println("TESTING SIZE AFTER ADD METHOD");
         assertEquals(4, facade.getAllBooks().getAll().size(), "Expects four rows in the database");
-    }      
+    }     
+    
+    //Ikke fremragende måde at teste på da, der er auto increment på ID og det derfor rykkes op hele tiden deraf disabled
+    @Disabled
+    @Test
+    public void testDeleteBook() throws BookNotFoundException {
+        System.out.println("TESTING SIZE BEFORE DELETE METHOD ....");
+        facade.deleteBook(9);
+        System.out.println("TESTING SIZE AFTER ADD METHOD");
+        assertEquals(2, facade.getAllBooks().getAll().size(), "Expects two rows in the database");
+    }    
 }
