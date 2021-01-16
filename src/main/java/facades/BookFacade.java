@@ -3,16 +3,20 @@ package facades;
 import DTO.BookDTO;
 import DTO.BooksDTO;
 import entities.Book;
+import entities.Role;
+import entities.User;
+import errorhandling.BookNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import utils.EMF_Creator;
 
 public class BookFacade {
 
     private static BookFacade instance;
     private static EntityManagerFactory emf;
-
-    public BookFacade() {
-    }
+    
+    //Private Constructor to ensure Singleton
+    private BookFacade() {}
 
     public static BookFacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -34,25 +38,45 @@ public class BookFacade {
         } finally {
             em.close();
         }
-    }
+    }  
     
-
-    
-       public BookDTO addBook(int isbn, String title, String author, String publisher, int publishYear) {
-        EntityManager em = emf.createEntityManager();
-
+    public void addBook(int isbn, String title, String author, String publisher, int publishYear) {
+        EntityManager em = getEntityManager();
         Book book = new Book(isbn, title, author, publisher, publishYear);
 
         try {
             em.getTransaction().begin();
+
             em.persist(book);
+
             em.getTransaction().commit();
-            return new BookDTO(book);
+
         } finally {
             em.close();
         }
-
     }
+        
+
+    public BookDTO deleteBook(int id) throws BookNotFoundException {
+        EntityManager em = getEntityManager();
+        Book book = em.find(Book.class, id);
+
+        if (book == null) {
+            throw new BookNotFoundException(String.format("Book with id: (%d) not found, try something else", id));
+        } else {
+
+            try {
+                em.getTransaction().begin();
+                em.remove(book);
+                em.getTransaction().commit();
+            } finally {
+                em.close();
+            }
+            BookDTO bookDTO = new BookDTO(book);
+            return bookDTO;
+        }
+    }
+      
 
     public void populateDB(){
         EntityManager em = emf.createEntityManager();

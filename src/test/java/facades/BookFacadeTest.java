@@ -66,7 +66,5 @@ public class BookFacadeTest {
         facade.addBook(isbn, title, author, publisher, publishYear);
         System.out.println("TESTING SIZE AFTER ADD METHOD");
         assertEquals(4, facade.getAllBooks().getAll().size(), "Expects four rows in the database");
-    }
-
-       
+    }      
 }
