@@ -1,5 +1,6 @@
 package facades;
 
+import DTO.BookDTO;
 import DTO.BooksDTO;
 import entities.Book;
 import javax.persistence.EntityManager;
@@ -33,6 +34,24 @@ public class BookFacade {
         } finally {
             em.close();
         }
+    }
+    
+
+    
+       public BookDTO addBook(int isbn, String title, String author, String publisher, int publishYear) {
+        EntityManager em = emf.createEntityManager();
+
+        Book book = new Book(isbn, title, author, publisher, publishYear);
+
+        try {
+            em.getTransaction().begin();
+            em.persist(book);
+            em.getTransaction().commit();
+            return new BookDTO(book);
+        } finally {
+            em.close();
+        }
+
     }
 
     public void populateDB(){

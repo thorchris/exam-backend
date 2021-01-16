@@ -52,5 +52,21 @@ public class BookFacadeTest {
         BooksDTO result = facade.getAllBooks();
         assertEquals(3, result.getAll().size(), "Expects three rows in the database");
     }
+    
+    @Test
+    public void testAddBook() {
+        System.out.println("TESTING SIZE AFTER ADD METHOD ....");
+
+        int isbn = 978148414;
+        String title = "Postmand Per";
+        String author = "John A. Cunliffe";
+        String publisher = "Gyldendal";
+        int publishYear = 2017;
+
+        facade.addBook(isbn, title, author, publisher, publishYear);
+        System.out.println("TESTING SIZE AFTER ADD METHOD");
+        assertEquals(4, facade.getAllBooks().getAll().size(), "Expects four rows in the database");
+    }
+
        
 }
